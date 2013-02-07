@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="th.co.mwa.cis.business.persistence.EmployeeMapper">
+
+	<cache />
+
+	<select id="getEmployeeList" resultType="Employee">
+		SELECT
+			EMPLOYEE_ID AS employeeId, 
+			FIRSTNAME AS firstname, 
+			LASTNAME AS lastname, 
+			TITLE AS title, 
+			DEPARTMENT AS department,
+			JOIN_DATE AS joinDate, 
+			EXPERIENCE AS experience
+		FROM 
+			EMPLOYEE
+	</select>
+
+	<select id="getEmployeeById" parameterType="string" resultType="Employee">
+		SELECT
+			EMPLOYEE_ID AS employeeId, 
+			FIRSTNAME AS firstname, 
+			LASTNAME AS lastname, 
+			TITLE AS title, 
+			DEPARTMENT AS department,
+			JOIN_DATE AS joinDate, 
+			EXPERIENCE AS experience
+		FROM 
+			EMPLOYEE
+		WHERE 
+			EMPLOYEE.EMPLOYEE_ID = #{employeeId}
+	</select>
+
+	<select id="getEmployeeByName" parameterType="string" resultType="Employee">
+		SELECT
+			EMPLOYEE_ID AS employeeId, 
+			FIRSTNAME AS firstname, 
+			LASTNAME AS lastname, 
+			TITLE AS title, 
+			DEPARTMENT AS department,
+			JOIN_DATE AS joinDate, 
+			EXPERIENCE AS experience
+		FROM 
+			EMPLOYEE
+		WHERE 
+			EMPLOYEE.FIRSTNAME LIKE #{name} OR EMPLOYEE.LASTNAME LIKE #{name}
+	</select>
+
+	<select id="getEmployeeByExample" parameterType="Employee" resultType="Employee">
+		SELECT
+			EMPLOYEE_ID AS employeeId, 
+			FIRSTNAME AS firstname, 
+			LASTNAME AS lastname, 
+			TITLE AS title, 
+			DEPARTMENT AS department,
+			JOIN_DATE AS joinDate, 
+			EXPERIENCE AS experience
+		FROM 
+			EMPLOYEE
+		<where>
+		  <if test="employeeId != null">
+		    EMPLOYEE_ID = #{employeeId}
+		  </if>
+		  <if test="firstname != null">
+		    OR FIRSTNAME = #{firstname}
+		  </if>
+		  <if test="lastname != null">
+		    OR LASTNAME = #{lastname}
+		  </if>
+		  <if test="title != null">
+		    OR TITLE = #{title}
+		  </if>
+		  <if test="department != null">
+		    OR DEPARTMENT = #{department}
+		  </if>
+		  <if test="joinDate != null">
+		    OR JOIN_DATE = #{joinDate}
+		  </if>
+		  <if test="experience != null">
+		    OR EXPERIENCE = #{experience}
+		  </if>		  
+		</where>
+	</select>
+
+</mapper>
