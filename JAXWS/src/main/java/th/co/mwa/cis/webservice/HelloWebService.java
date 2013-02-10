@@ -12,7 +12,7 @@ public class HelloWebService {
  
 	@WebMethod(operationName="sayHello")
 	public String sayHello( String name ) {
-		return "Hello, JAX-WS and " + name;
+		return "Hello, from JAX-WS reply to " + name;
 	}
  
 }
