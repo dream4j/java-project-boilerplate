@@ -1,0 +1,1 @@
+A boilerplate for Java web service application.
